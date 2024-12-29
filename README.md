@@ -42,6 +42,14 @@ The Quran Search App allows users to search Quranic verses, view Tafseer (explan
 
 ---
 
+## Download the App
+
+Click the link below to download the APK file:
+
+[Download Quran App (v1.0.0)](https://github.com/AbdelrhmanUZaki/quran_flutter/releases/download/v1.0.0/QuranSearch-v1.0.0.apk)
+
+---
+
 ## Installation
 
 1. Clone the repository:
