@@ -154,11 +154,10 @@ class _QuranSearchScreenState extends State<QuranSearchScreen> {
                           mainAxisSize: MainAxisSize.min, // Ensure compact layout
                           children: [
                             Text(
-                              '${surah['name']} (${surah['number']})',
+                              '${surah['number']} - ${surah['name']}',
                               textAlign: TextAlign.right,
                             ),
                             const SizedBox(width: 10),
-                            const Icon(Icons.book, color: Colors.teal),
                           ],
                         ),
                       ),
