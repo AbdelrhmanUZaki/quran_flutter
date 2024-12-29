@@ -32,20 +32,16 @@ The Quran Search App allows users to search Quranic verses, view Tafseer (explan
 
 ## Screenshots
 
-### Initial Screen
-![Initial Screen](images/initial-screen.png)
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
 
-### Limit Search by Surah
-![Limit Search](images/limit-search.png)
+  <img src="images/initial-screen.png" alt="Initial Screen" width="300">
+  <img src="images/limit-search.png" alt="Limit Search" width="300">
+  <img src="images/search-light-theme.png" alt="Search Light Theme" width="300">
 
-### Light Mode Search Results
-![Search Light Theme](images/search-light-theme.png)
+  <img src="images/search-dark-theme.png" alt="Search Dark Theme" width="300">
+  <img src="images/toggle-tafseer-btn.png" alt="Toggle Tafseer Button" width="300">
 
-### Dark Mode Search Results
-![Search Dark Theme](images/search-dark-theme.png)
-
-### Toggle Tafseer View
-![Toggle Tafseer Button](images/toggle-tafseer-btn.png)
+</div>
 
 ---
 
