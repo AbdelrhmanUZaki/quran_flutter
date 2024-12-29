@@ -4,6 +4,15 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 class QuranSearchScreen extends StatefulWidget {
+  final ThemeMode themeMode;
+  final VoidCallback onToggleTheme;
+
+  const QuranSearchScreen({
+    required this.themeMode,
+    required this.onToggleTheme,
+    Key? key,
+  }) : super(key: key);
+
   @override
   _QuranSearchScreenState createState() => _QuranSearchScreenState();
 }
@@ -61,7 +70,7 @@ class _QuranSearchScreenState extends State<QuranSearchScreen> {
         final data = json.decode(response.body);
         setState(() {
           _resultCount = data['data']['count'];
-          _searchResults = (data['data']['matches'] as List<dynamic>).toList();
+          _searchResults = (data['data']['matches'] as List<dynamic>);
         });
       } else {
         setState(() {
@@ -93,9 +102,6 @@ class _QuranSearchScreenState extends State<QuranSearchScreen> {
           _tafsirResults[ayahNumber] = tafsir;
           _expandedAyahs.add(ayahNumber);
         });
-        // print(_tafsirResults);
-        // print("**********************************");
-        // print(_expandedAyahs);
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -112,6 +118,16 @@ class _QuranSearchScreenState extends State<QuranSearchScreen> {
         appBar: AppBar(
           title: const Text('القرآن الكريم'),
           centerTitle: true,
+          actions: [
+            IconButton(
+              icon: Icon(
+                widget.themeMode == ThemeMode.light
+                    ? Icons.dark_mode
+                    : Icons.light_mode,
+              ),
+              onPressed: widget.onToggleTheme,
+            ),
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -150,15 +166,9 @@ class _QuranSearchScreenState extends State<QuranSearchScreen> {
                       value: surah['number'].toString(),
                       child: Align(
                         alignment: Alignment.centerRight,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min, // Ensure compact layout
-                          children: [
-                            Text(
-                              '${surah['number']} - ${surah['name']}',
-                              textAlign: TextAlign.right,
-                            ),
-                            const SizedBox(width: 10),
-                          ],
+                        child: Text(
+                          '${surah['number']} - ${surah['name']}',
+                          textAlign: TextAlign.right,
                         ),
                       ),
                     );
@@ -225,8 +235,8 @@ class _QuranSearchScreenState extends State<QuranSearchScreen> {
                           fontWeight: FontWeight.bold,
                           color: Colors.teal,
                         ),
-                      ),
                     ),
+                  ),
                   Expanded(
                     child: ListView.builder(
                       itemCount: _searchResults.length,
@@ -235,6 +245,7 @@ class _QuranSearchScreenState extends State<QuranSearchScreen> {
                         final ayahNumber = result['number'];
                         final isExpanded = _expandedAyahs.contains(ayahNumber);
                         final tafsir = _tafsirResults[ayahNumber] ?? '';
+
                         return Card(
                           elevation: 5,
                           margin: const EdgeInsets.symmetric(vertical: 8),
@@ -246,7 +257,6 @@ class _QuranSearchScreenState extends State<QuranSearchScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // Ayah Text
                                 Text(
                                   '${result['surah']['name']} - آية ${result['numberInSurah']}',
                                   style: const TextStyle(
@@ -261,23 +271,17 @@ class _QuranSearchScreenState extends State<QuranSearchScreen> {
                                   style: const TextStyle(
                                     fontSize: 18,
                                     height: 1.5,
-                                    fontFamily: 'Amiri',
+                                    // fontFamily: 'Amiri',
                                   ),
                                   textAlign: TextAlign.justify,
                                 ),
                                 const SizedBox(height: 10),
-                                // Tafseer Button
                                 ElevatedButton(
                                   onPressed: () {
                                     if (isExpanded) {
-                                      print("Will remove tafseer");
-                                      print(_expandedAyahs);
                                       setState(() {
                                         _expandedAyahs.remove(ayahNumber);
                                       });
-                                      print(_expandedAyahs);
-                                      print("tafseer has been removed");
-
                                     } else {
                                       _fetchTafseer(ayahNumber);
                                     }
@@ -286,7 +290,6 @@ class _QuranSearchScreenState extends State<QuranSearchScreen> {
                                       ? 'إخفاء التفسير'
                                       : 'عرض التفسير'),
                                 ),
-                                // Tafseer Text
                                 if (isExpanded && tafsir.isNotEmpty)
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
@@ -313,8 +316,8 @@ class _QuranSearchScreenState extends State<QuranSearchScreen> {
                                           textAlign: TextAlign.justify,
                                         ),
                                       ],
-                                    ),
                                   ),
+                                ),
                               ],
                             ),
                           ),
