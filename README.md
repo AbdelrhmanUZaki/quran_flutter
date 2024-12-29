@@ -25,9 +25,6 @@ The Quran Search App allows users to search Quranic verses, view Tafseer (explan
 - Users can switch between light and dark themes for a comfortable viewing experience.
 - Ensures better readability during day or night usage.
 
-### 5. **About Page**
-- Provides information about the app's purpose and mission.
-
 ---
 
 ## Screenshots
